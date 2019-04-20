@@ -1,0 +1,17 @@
+if(!requireNamespace("BiocManager"))
+  install.packages ("BiocManager")
+BiocManager::install ("tidyverse")
+installed.packages(c("tidyverse", "base"))
+
+library("tidyverse")
+
+#reading in data
+xy_file <- read.csv("/Users/emilyburnside/Dropbox/R/Data/xy_co_ords.csv")
+view(xy_file)
+
+#example function where "x_coord" and "y_coord" are csv column headers
+ggplot(data=xy_file, mapping = aes(x=x_coord,y=y_coord)) + geom_point()
+
+#calling this a name for easier further manipulation
+xy_file_plot <- ggplot(data=xy_file, mapping = aes(x=x_coord,y=y_coord))
+xy_file_plot + geom_density2d(size=1.2)
