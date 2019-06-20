@@ -1,0 +1,38 @@
+if(!requireNamespace("BiocManager"))
+  install.packages ("BiocManager")
+BiocManager::install ("tidyverse")
+installed.packages(c("tidyverse", "base"))
+
+library("tidyverse")
+
+#reading in data
+xy_file <- read.csv("/Users/emilyburnside/Dropbox/R/Data/xy_co_ords.csv")
+view(xy_file)
+
+ggplot(data=xy_file, mapping = aes(x=x_coord,y=y_coord)) + geom_point()
+
+xy_file_plot <- ggplot(data=xy_file, mapping = aes(x=x_coord,y=y_coord))
+xy_file_plot + geom_density2d(size=1.2)
+
+install.packages("hexbin")
+xy_file_plot + geom_hex()
+
+xy_file_plot + geom_point(alpha=0.01)
+xy_file_plot + geom_density2d()  + theme(panel.grid = element_blank())
+
+plot_pic <- xy_file_plot + geom_density2d(size=1.2)  + theme(panel.grid = element_blank())
+
+
+ggsave("CST.png", plot_pic, dpi=300)
+
+ggplot(data=xy_file, mapping = aes(x=x_coord)) + geom_density(adjust = 2,size=4, color = "blue")
+
+xline <-ggplot(data=xy_file, mapping = aes(x=x_coord)) + geom_density(adjust = 2, size = 4, color = "blue")
+
+ggsave("CSTx.png", xline, dpi=300)
+
+ggplot(data=xy_file, mapping = aes(x=y_coord)) + geom_density(adjust = 2, size = 2, color = "blue")
+
+yline <-ggplot(data=xy_file, mapping = aes(x=y_coord)) + geom_density(adjust = 2,size = 2, color = "blue")
+ggsave("CSTy.png", yline, dpi=300)
+
